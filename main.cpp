@@ -13,8 +13,11 @@ struct player
 
 int menu();
 void printRules();
-void addCommand(linkedList<std::string, std::string> Storage);
-void removeCommand(linkedList<std::string, std::string> Storage);
+//TODO: Template the templates
+void addCommand(linkedList<std::string, std::string> &Storage);
+void removeCommand(linkedList<std::string, std::string> &Storage);
+void printList(linkedList<std::string, std::string> Storage);
+void writeChanges(linkedList<std::string, std::string> Storage);
 void gamePlay(linkedList<std::string, std::string> Storage, int& score);
 node<std::string, std::string> *getRandomNode(linkedList<std::string, std::string> Storage);
 
@@ -39,16 +42,9 @@ int main()
         storage.addNode(new node<std::string, std::string>(command, definition));
     }
 
-/*  node<std::string, std::string> *current = storage.getHead();
+    commands.close();
 
-    while(current != NULL)
-    {
-        std::cout << current->getCommand();
-        std::cout << current->getDefinition() << std::endl;
 
-        current = current->getNext();
-    }
-*/
     std::cout << "length:" << storage.getLength() << std::endl;
     std::cout << "Welcome to Linux Command Learner \n";
 
@@ -68,14 +64,17 @@ int main()
                 // Load
                 break;
             case 4:
-                addCommand(storage);
-                break;
+                addCommand(storage); //most of these functions are not necisary,
+                break;               //but I think they make the code more readable.
             case 5:
                 removeCommand(storage);
                 break;
             case 6:
+                writeChanges(storage);
                 exit = true;
                 break;
+            case 7:
+                printList(storage);
 
         } 
     }
@@ -91,8 +90,10 @@ int menu()
     std::cout << "4. Add Command \n";
     std::cout << "5. Remove Command \n";
     std::cout << "6. Exit \n";
+    std::cout << "7. Print List \n";
 
     std::cin >> selection;
+    std::cin.ignore();
 
     return selection;
 }
@@ -112,7 +113,10 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
 
     std::cout << "Pleas enter a number between 5 and 30 to determine the ammount of questions \n";
     std::cin >> length;
+    std::cin.ignore();
 
+    //game loop: terminates upon selected number of questions or 
+    //apon entering the exit key
     for(int i = 0; i < length && !exit; i++)
     {
         node<std::string, std::string> *current = getRandomNode(Storage);
@@ -122,24 +126,26 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
 
         for(int j = 0; j < 3; j++)
         {
-            std::cout << j << '.';
+            std::cout << j << ". ";
             if(j == correctAnswer)
                 std::cout << current->getDefinition();
             else
                 std::cout << getRandomNode(Storage)->getDefinition(); 
             std::cout << '\n';
         }
-        
-        //std::cout << "teenis teenis teenis teenis teenis teenis";
+
+        std::cout << "4. exit" << '\n';
         int userInput;
-        std::cin.ignore(80, '\n');
         std::cin >> userInput;
+        std::cin.ignore();
 
         if(userInput == correctAnswer)
         {
             score++;
             std::cout << "Correct!" << '\n';
         }
+        else if(userInput == 4)
+            break;
         else
         {
             score--;
@@ -161,21 +167,48 @@ node<std::string, std::string> *getRandomNode(linkedList<std::string, std::strin
     return current;
 }
 
-void addCommand(linkedList<std::string, std::string> Storage)
+void addCommand(linkedList<std::string, std::string> &Storage)
 {
     std::string addedCommand;
     std::string addedDefinition;
-    std::cout << "Enter a command to be added";
-    std::cin >> addedCommand;
-    std::cout << "Enter the discription for the added command";
-    std::cin >> addedDefinition;
+    std::cout << "Enter a command to be added \n";
+    std::getline(std::cin, addedCommand);
+    std::cout << "Enter the discription for the added command \n";
+    std::getline(std::cin, addedDefinition);
     Storage.addNode(new node<std::string, std::string>(addedCommand, addedDefinition));
 }
 
-void removeCommand(linkedList<std::string, std::string> Storage)
+void removeCommand(linkedList<std::string, std::string> &Storage)
 {
     std::string removed;
-    std::cout << "Enter a command to be removed";
+    std::cout << "Enter a command to be removed \n";
     std::cin >> removed;
+    std::cin.ignore();
     Storage.removeNode(removed);
+}
+
+void printList(linkedList<std::string, std::string> Storage)
+{
+    node<std::string, std::string> *current = Storage.getHead();
+
+    while(current != NULL)
+    {
+        std::cout << current->getCommand() << '\n';
+        std::cout << current->getDefinition() << '\n';
+
+        current = current->getNext();
+    }
+}
+
+void writeChanges(linkedList<std::string, std::string> Storage)
+{
+    std::ofstream writeFile;
+    writeFile.open("../commands.csv");
+    
+    node<std::string, std::string> *current = Storage.getHead();
+    while(current != NULL)
+    {
+    writeFile << current->getCommand() << ',' << current->getDefinition() << '\n';
+    current = current->getNext();
+    }
 }

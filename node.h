@@ -10,18 +10,11 @@ class node
         node *next;
     
     public:
-    //may need template refrence
         node(T1 Command, T2 Definition)
         {
             command = Command;
             definition = Definition;
         }
-
-        ~node()
-        {
-            delete next;
-        }
-
         T1 getCommand()
         {
             return command;

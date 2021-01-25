@@ -52,23 +52,27 @@ public:
             {
                 head = head->getNext();
                 delete temp;
+                length -=1;
             }
             
             else
             {
                 for(int i = 0; i < length; i++)
                 {
-                    if(temp->getNext()->getNext() == NULL && temp->getNext()->getNext()->getCommand() == deleted)
+                    if(temp->getNext()->getNext() == NULL && temp->getNext()->getCommand() == deleted)
                     {
                         delete temp->getNext();
                         temp->setNext(NULL);
+                        break;
                     }
                     else if(temp->getNext()->getCommand() == deleted)
                     {
                         node<T1, T2> *temp2 = temp->getNext();
                         temp->setNext(temp->getNext()->getNext());
                         delete temp2;
+                        break;
                     }
+                    temp = temp->getNext();
                 }
             }
         }
