@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -g   CMakeFiles/assigment1.dir/main.cpp.o  -o assigment1 
