@@ -139,7 +139,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=assigment1
+CMAKE_PROJECT_NAME:STATIC=assignment1
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -205,6 +205,12 @@ assigment1_BINARY_DIR:STATIC=/home/j/code/c++/fromgithub/csAssignment1/build
 
 //Value Computed by CMake
 assigment1_SOURCE_DIR:STATIC=/home/j/code/c++/fromgithub/csAssignment1
+
+//Value Computed by CMake
+assignment1_BINARY_DIR:STATIC=/home/j/code/c++/fromgithub/csAssignment1/build
+
+//Value Computed by CMake
+assignment1_SOURCE_DIR:STATIC=/home/j/code/c++/fromgithub/csAssignment1
 
 
 ########################

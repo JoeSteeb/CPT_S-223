@@ -17,66 +17,65 @@ void printRules();
 void addCommand(linkedList<std::string, std::string> &Storage);
 void removeCommand(linkedList<std::string, std::string> &Storage);
 void printList(linkedList<std::string, std::string> Storage);
-void writeChanges(linkedList<std::string, std::string> Storage);
-void gamePlay(linkedList<std::string, std::string> Storage, int& score);
+void writeChanges(node<std::string, std::string> *writtenNode);
+void gamePlay(linkedList<std::string, std::string> Storage, int &score);
+void writeNode(node<std::string, std::string> *writtenNode, std::ofstream &writeFile);
 node<std::string, std::string> *getRandomNode(linkedList<std::string, std::string> Storage);
 
 int main()
 {
     srand(time(0));
-    linkedList<std::string, std::string> storage;
+    linkedList<std::string, std::string> commandStorage;
     std::string currentName;
     int currentScore = 0;
     bool exit = false;
-    
+
     std::ifstream commands("../commands.csv");
 
     std::string command;
     std::string definition;
-    
+
     //Loading commands to list
-    while(commands.good())
+    while (commands.good())
     {
-        getline(commands, command, ','); //commands and definitions seperated by a comma
+        getline(commands, command, ',');     //commands and definitions seperated by a comma
         getline(commands, definition, '\n'); //each pair has it's own line so they are seperated by \n
-        storage.addNode(new node<std::string, std::string>(command, definition));
+        commandStorage.addNode(new node<std::string, std::string>(command, definition));
     }
 
     commands.close();
 
-
-    std::cout << "length:" << storage.getLength() << std::endl;
+    std::cout << "length:" << commandStorage.getLength() << std::endl;
     std::cout << "Welcome to Linux Command Learner \n";
 
     //main loop
-    while(!exit)
+    while (!exit)
     {
         //menu selection
-        switch(menu())
+        switch (menu())
         {
-            case 1:
-                printRules();
-                break;
-            case 2:
-                gamePlay(storage, currentScore);
-                break;
-            case 3:
-                // Load
-                break;
-            case 4:
-                addCommand(storage); //most of these functions are not necisary,
-                break;               //but I think they make the code more readable.
-            case 5:
-                removeCommand(storage);
-                break;
-            case 6:
-                writeChanges(storage);
-                exit = true;
-                break;
-            case 7:
-                printList(storage);
-
-        } 
+        case 1:
+            printRules();
+            break;
+        case 2:
+            gamePlay(commandStorage, currentScore);
+            break;
+        case 3:
+            // Load
+            break;
+        case 4:
+            addCommand(commandStorage); //most of these functions are not necisary,
+            break;                      //but I think they make the code more readable.
+        case 5:
+            removeCommand(commandStorage);
+            break;
+        case 6:
+            writeChanges(commandStorage.getHead());
+            exit = true;
+            break;
+        case 7:
+            printList(commandStorage);
+        }
     }
 }
 
@@ -97,13 +96,13 @@ int menu()
 
     return selection;
 }
+void writeNode(node<std::string, std::string>);
 
 void printRules()
 {
     std::cout << "Rules: \n";
     std::cout << "The objective of the game is to match the given linux command with the correct explanation";
     std::cout << "points are gained by selecting the correct answer points are lost if the answer is incorrect";
-
 }
 
 void gamePlay(linkedList<std::string, std::string> Storage, int &score)
@@ -115,22 +114,22 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
     std::cin >> length;
     std::cin.ignore();
 
-    //game loop: terminates upon selected number of questions or 
+    //game loop: terminates upon selected number of questions or
     //apon entering the exit key
-    for(int i = 0; i < length && !exit; i++)
+    for (int i = 0; i < length && !exit; i++)
     {
         node<std::string, std::string> *current = getRandomNode(Storage);
         std::cout << "Score: " << score << '\n';
         std::cout << current->getCommand() << ':' << '\n';
         int correctAnswer = rand() % 2;
 
-        for(int j = 0; j < 3; j++)
+        for (int j = 0; j < 3; j++)
         {
             std::cout << j << ". ";
-            if(j == correctAnswer)
+            if (j == correctAnswer)
                 std::cout << current->getDefinition();
             else
-                std::cout << getRandomNode(Storage)->getDefinition(); 
+                std::cout << getRandomNode(Storage)->getDefinition();
             std::cout << '\n';
         }
 
@@ -139,28 +138,25 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
         std::cin >> userInput;
         std::cin.ignore();
 
-        if(userInput == correctAnswer)
+        if (userInput == correctAnswer)
         {
             score++;
             std::cout << "Correct!" << '\n';
         }
-        else if(userInput == 4)
+        else if (userInput == 4)
             break;
         else
         {
             score--;
             std::cout << "Incorrect" << '\n';
         }
-        
     }
-
-
 }
 node<std::string, std::string> *getRandomNode(linkedList<std::string, std::string> Storage)
 {
     node<std::string, std::string> *current = Storage.getHead();
 
-    for(int i = 1; i <  rand() % Storage.getLength(); i++)
+    for (int i = 1; i < rand() % Storage.getLength(); i++)
     {
         current = current->getNext();
     }
@@ -191,7 +187,7 @@ void printList(linkedList<std::string, std::string> Storage)
 {
     node<std::string, std::string> *current = Storage.getHead();
 
-    while(current != NULL)
+    while (current != NULL)
     {
         std::cout << current->getCommand() << '\n';
         std::cout << current->getDefinition() << '\n';
@@ -200,15 +196,22 @@ void printList(linkedList<std::string, std::string> Storage)
     }
 }
 
-void writeChanges(linkedList<std::string, std::string> Storage)
+//outputs commands, and any changes to commands.csv
+void writeChanges(node<std::string, std::string> *writtenNode)
 {
     std::ofstream writeFile;
     writeFile.open("../commands.csv");
-    
-    node<std::string, std::string> *current = Storage.getHead();
-    while(current != NULL)
+    writeNode(writtenNode, writeFile);
+    writeFile.close();
+}
+
+void writeNode(node<std::string, std::string> *writtenNode, std::ofstream &writeFile)
+{
+    if (writtenNode->getNext() != NULL)
     {
-    writeFile << current->getCommand() << ',' << current->getDefinition() << '\n';
-    current = current->getNext();
+        writeNode(writtenNode->getNext(), writeFile);
+        writeFile << '\n';
     }
+    writeFile << writtenNode->getCommand() << ',';
+    writeFile << writtenNode->getDefinition();
 }
