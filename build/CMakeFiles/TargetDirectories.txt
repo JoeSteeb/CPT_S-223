@@ -1,3 +1,0 @@
-/home/j/code/c++/fromgithub/csAssignment1/build/CMakeFiles/rebuild_cache.dir
-/home/j/code/c++/fromgithub/csAssignment1/build/CMakeFiles/assignment1.dir
-/home/j/code/c++/fromgithub/csAssignment1/build/CMakeFiles/edit_cache.dir

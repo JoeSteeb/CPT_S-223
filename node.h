@@ -7,7 +7,7 @@ class node
 private:
     T1 command;
     T2 definition;
-    node<T1, T2> *next;
+    node *next;
 
 public:
     node(T1 Command, T2 Definition)
