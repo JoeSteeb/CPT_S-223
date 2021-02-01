@@ -76,6 +76,13 @@ public:
             }
         }
     }
+    void deleteList(node<T1, T2> *temp)
+    {
+        if (temp->getNext() != NULL)
+            deleteList(temp->getNext());
+        //std::cout << "Deleted: " << temp->getCommand();
+        delete temp;
+    }
 };
 
 #endif

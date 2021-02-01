@@ -10,6 +10,7 @@ private:
     node *next;
 
 public:
+    node() {}
     node(T1 Command, T2 Definition)
     {
         command = Command;
@@ -23,6 +24,10 @@ public:
     T2 getDefinition()
     {
         return definition;
+    }
+    void setDefinition(T2 def)
+    {
+        definition = def;
     }
 
     void setNext(node *Next)
