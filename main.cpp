@@ -18,8 +18,9 @@ void writeNode(node<std::string, std::string> *writtenNode, std::ofstream &write
 void printArray(node<std::string, int> *profileStorage[], int size, int &score, int &currentPlayer);
 void addUser(node<std::string, int> *profileStorage[], int size, int score);
 void writeUsers(node<std::string, int> *profileStorage[], int size, int score, int &currentPlayer);
+void removeArrEl(std::string *arr, int index, int &length);
 
-node<std::string, std::string> *getRandomNode(linkedList<std::string, std::string> Storage);
+node<std::string, std::string> *getNodeAt(linkedList<std::string, std::string> Storage, int index);
 
 int main()
 {
@@ -153,29 +154,41 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
     //upon entering the exit key
     for (int i = 0; i < length && !exit; i++)
     {
-        node<std::string, std::string> *current = getRandomNode(Storage);
+        int correctIndex = rand() % Storage.getLength();
+        node<std::string, std::string> *current = getNodeAt(Storage, correctIndex);
+        std::string correctDefinition = current->getDefinition();
+        std::string *randSelection = Storage.defCopy();
+        int copyLength = Storage.getLength();
+        removeArrEl(randSelection, correctIndex, copyLength);
+
         std::cout << "Score: " << score << '\n';
         std::cout << current->getCommand() << ':' << '\n';
-        int correctAnswer = rand() % 2 + 1;
+        int correctAnswer = rand() % 3 + 1;
 
         for (int j = 1; j <= 3; j++)
         {
             std::cout << j << ". ";
             if (j == correctAnswer)
-                std::cout << current->getDefinition();
+            {
+                std::cout << correctDefinition;
+            }
+
             else
             {
-                node<std::string, std::string> *temp;
-                temp = getRandomNode(Storage);
-                if (temp == current)
+                int randIndex = rand() % copyLength;
+                std::cout << randSelection[randIndex];
+
+                removeArrEl(randSelection, randIndex, copyLength);
+                //std::string temp;
+                /*if (temp == current)
                 {
                     if (temp->getNext() != NULL)
                         temp = temp->getNext();
                     else
                         temp = Storage.getHead();
-                }
+                }*/
 
-                std::cout << temp->getDefinition();
+                //std::cout << temp;
             }
             std::cout << '\n';
         }
@@ -197,13 +210,20 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
             score--;
             std::cout << "Incorrect" << '\n';
         }
+        delete[] randSelection;
     }
 }
-node<std::string, std::string> *getRandomNode(linkedList<std::string, std::string> Storage)
+void removeArrEl(std::string *arr, int index, int &length)
+{
+    arr[index] = arr[length - 1];
+    length--;
+}
+
+node<std::string, std::string> *getNodeAt(linkedList<std::string, std::string> Storage, int index)
 {
     node<std::string, std::string> *current = Storage.getHead();
 
-    for (int i = 0; i < rand() % Storage.getLength(); i++)
+    for (int i = 0; i < index; i++)
     {
         current = current->getNext();
     }

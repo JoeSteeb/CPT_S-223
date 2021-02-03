@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/j/code/c++/fromgithub/csAssignment1/linkedList.h
+iostream
+-
+node.h
+/home/j/code/c++/fromgithub/csAssignment1/node.h
+
+/home/j/code/c++/fromgithub/csAssignment1/main.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+cstdlib
+-
+ctime
+-
+node.h
+/home/j/code/c++/fromgithub/csAssignment1/node.h
+linkedList.h
+/home/j/code/c++/fromgithub/csAssignment1/linkedList.h
+
+/home/j/code/c++/fromgithub/csAssignment1/node.h
+

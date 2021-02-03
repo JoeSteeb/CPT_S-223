@@ -20,6 +20,19 @@ public:
         //tail = NULL;
     }
 
+    std::string *defCopy()
+    {
+        node<T1, T2> *current = head;
+        std::string *defList = new std::string[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            defList[i] = current->getDefinition();
+            current = current->getNext();
+        }
+        return defList;
+    }
+
     node<T1, T2> *getHead()
     {
         return head;
@@ -48,11 +61,10 @@ public:
     {
 
         node<T1, T2> *temp = head;
-        if (head->getDefinition() == deleted)
+        if (head->getCommand() == deleted)
         {
             head = head->getNext();
             delete temp;
-            length -= 1;
         }
 
         else
@@ -75,6 +87,7 @@ public:
                 temp = temp->getNext();
             }
         }
+        length--;
     }
     void deleteList(node<T1, T2> *temp)
     {
