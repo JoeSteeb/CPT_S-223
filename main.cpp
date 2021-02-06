@@ -3,9 +3,16 @@ Joseph Steeb
 CPT_S 223
 02/06/2021
 
-Linked lists are very efficient at adding, and removing nodes, as there is no need to shift data around, you must only re-arrange pointers. Linked lists also insure that no memory is wasted, as they dynamically change size, while arrays usually have to have somesort of defined size in memory.
+Linked lists are very efficient at adding, and removing nodes, as there is no 
+need to shift data around, you must only re-arrange pointers. Linked lists 
+also insure that no memory is wasted, as they dynamically change size, while 
+arrays usually have to have somesort of defined size in memory.
 
-The downsides of linked lists include the fact that containers like arrays can be more memory efficient, due to the fact that each element does not have to have a pointer to the next element. directly gitting the n'th element is also not possible in a linked list, because the element must be found by transversing the list.
+The downsides of linked lists include the fact that containers like arrays 
+can be more memory efficient, due to the fact that each element does not have 
+to have a pointer to the next element. directly gitting the n'th element is 
+also not possible in a linked list, because the element must be found by 
+transversing the list.
 */
 #include <iostream>
 #include <fstream>
