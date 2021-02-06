@@ -6,7 +6,7 @@ CPT_S 223
 Linked lists are very efficient at adding, and removing nodes, as there is no 
 need to shift data around, you must only re-arrange pointers. Linked lists 
 also insure that no memory is wasted, as they dynamically change size, while 
-arrays usually have to have somesort of defined size in memory.
+arrays usually have to have some sort of defined size in memory.
 
 The downsides of linked lists include the fact that containers like arrays 
 can be more memory efficient, due to the fact that each element does not have 
