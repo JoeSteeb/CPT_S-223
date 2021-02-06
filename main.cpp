@@ -1,3 +1,12 @@
+/*
+Joseph Steeb
+CPT_S 223
+02/06/2021
+
+Linked lists are very efficient at adding, and removing nodes, as there is no need to shift data around, you must only re-arrange pointers. Linked lists also insure that no memory is wasted, as they dynamically change size, while arrays usually have to have somesort of defined size in memory.
+
+The downsides of linked lists include the fact that containers like arrays can be more memory efficient, due to the fact that each element does not have to have a pointer to the next element. directly gitting the n'th element is also not possible in a linked list, because the element must be found by transversing the list.
+*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -8,7 +17,6 @@
 
 int menu();
 void printRules();
-//TODO: Template the templates
 void addCommand(linkedList<std::string, std::string> &Storage);
 void removeCommand(linkedList<std::string, std::string> &Storage);
 void printList(linkedList<std::string, std::string> Storage);
@@ -201,14 +209,14 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
         if (userInput == correctAnswer)
         {
             score++;
-            std::cout << "Correct!" << '\n';
+            std::cout << "Correct!" << correctDefinition << '\n';
         }
         else if (userInput == 4)
             break;
         else
         {
             score--;
-            std::cout << "Incorrect" << '\n';
+            std::cout << "Incorrect" << correctDefinition << '\n';
         }
         delete[] randSelection;
     }
@@ -292,7 +300,7 @@ void printArray(node<std::string, int> *profileStorage[], int size, int &score, 
 void addUser(node<std::string, int> *profileStorage[], int size, int score)
 {
     std::string username;
-    std::cout << "enter a username";
+    std::cout << "enter a username:" << '\n';
     std::cin >> username;
 
     profileStorage[size - 1] = new node<std::string, int>(username, score);

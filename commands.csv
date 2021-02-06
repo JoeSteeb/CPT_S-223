@@ -2,3 +2,29 @@ ls,lists all in directory
 cd,changes directory
 pwd,prints current directory
 touch,creates new file
+grep,search for a text pattern in a file
+locate,finds files related to a name
+rm,removes file
+cp,copies file
+mv,moves file
+cat,lists components of a file
+mkdir,creates directory
+sudo,allows non root users to access admin commands
+chown,changes ownership of files
+kill,terminates running process
+man,displays manual for programs
+echo,moves data into files
+exit,exits shell
+clear,clears terminal text
+date,prints date and time
+env,lists all environment variables
+free,shows free memory
+groups,displays all the names of groups a user is a part
+history,shows previously used commands
+id,shows user and group information
+iostat,is used to show CPU and input/output statistics
+killall,terminates any processes by a given name
+ln,creates a soft link between files
+login,creates a new session with the system
+passwd,creates or updates passwords for users
+ping,used to determine connectivity between hosts on a network
