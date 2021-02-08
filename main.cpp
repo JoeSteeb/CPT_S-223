@@ -172,14 +172,16 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
         int correctIndex = rand() % Storage.getLength();
         node<std::string, std::string> *current = getNodeAt(Storage, correctIndex);
         std::string correctDefinition = current->getDefinition();
-        std::string *randSelection = Storage.defCopy();
+
+        std::string *randSelection = Storage.defCopy(); //copies definitions to an array
         int copyLength = Storage.getLength();
-        removeArrEl(randSelection, correctIndex, copyLength);
+        removeArrEl(randSelection, correctIndex, copyLength); //removes correct answer from definition array
 
         std::cout << "Score: " << score << '\n';
         std::cout << current->getCommand() << ':' << '\n';
-        int correctAnswer = rand() % 3 + 1;
+        int correctAnswer = rand() % 3 + 1; //randomly chooses the position of the correct answer
 
+        //prints a random definition, unless j = the correct position
         for (int j = 1; j <= 3; j++)
         {
             std::cout << j << ". ";
