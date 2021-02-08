@@ -26,7 +26,7 @@ int menu();
 void printRules();
 void addCommand(linkedList<std::string, std::string> &Storage);
 void removeCommand(linkedList<std::string, std::string> &Storage);
-void printList(linkedList<std::string, std::string> Storage);
+//void printList(linkedList<std::string, std::string> Storage);
 void writeChanges(node<std::string, std::string> *writtenNode);
 void gamePlay(linkedList<std::string, std::string> Storage, int &score);
 void writeNode(node<std::string, std::string> *writtenNode, std::ofstream &writeFile);
@@ -124,9 +124,9 @@ int main()
             commandStorage.deleteList(commandStorage.getHead());
             exit = true;
             break;
-        case 7:
-            printList(commandStorage);
-            break;
+            //case 7:
+            //printList(commandStorage);
+            //break;
         }
     }
 }
@@ -194,16 +194,6 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
                 std::cout << randSelection[randIndex];
 
                 removeArrEl(randSelection, randIndex, copyLength);
-                //std::string temp;
-                /*if (temp == current)
-                {
-                    if (temp->getNext() != NULL)
-                        temp = temp->getNext();
-                    else
-                        temp = Storage.getHead();
-                }*/
-
-                //std::cout << temp;
             }
             std::cout << '\n';
         }
@@ -228,12 +218,15 @@ void gamePlay(linkedList<std::string, std::string> Storage, int &score)
         delete[] randSelection;
     }
 }
+
+//hacky way of removing element from static array
 void removeArrEl(std::string *arr, int index, int &length)
 {
     arr[index] = arr[length - 1];
     length--;
 }
 
+//iterates through the list to find an element at a specific index
 node<std::string, std::string> *getNodeAt(linkedList<std::string, std::string> Storage, int index)
 {
     node<std::string, std::string> *current = Storage.getHead();
@@ -287,6 +280,8 @@ void writeNode(node<std::string, std::string> *writtenNode, std::ofstream &write
     writeFile << writtenNode->getDefinition();
 }
 
+//prints profiles, and takes user selection
+//score of user selection is then set to score
 void printArray(node<std::string, int> *profileStorage[], int size, int &score, int &currentPlayer)
 {
     std::cout << "Input the coresponding number for the user you would like to choose" << '\n';
@@ -304,6 +299,7 @@ void printArray(node<std::string, int> *profileStorage[], int size, int &score, 
     score = profileStorage[selection - 1]->getDefinition();
 }
 
+//adds new user node to the last element of profile array
 void addUser(node<std::string, int> *profileStorage[], int size, int score)
 {
     std::string username;
@@ -313,6 +309,7 @@ void addUser(node<std::string, int> *profileStorage[], int size, int score)
     profileStorage[size - 1] = new node<std::string, int>(username, score);
 }
 
+//writes users and scores to profiles file
 void writeUsers(node<std::string, int> *profileStorage[], int size, int score, int &currentPlayer)
 {
     if (currentPlayer > -1)
@@ -332,7 +329,7 @@ void writeUsers(node<std::string, int> *profileStorage[], int size, int score, i
     writeFile2.close();
 }
 
-void printList(linkedList<std::string, std::string> Storage)
+/*void printList(linkedList<std::string, std::string> Storage)
 {
     node<std::string, std::string> *current = Storage.getHead();
 
@@ -343,4 +340,4 @@ void printList(linkedList<std::string, std::string> Storage)
 
         current = current->getNext();
     }
-}
+}*/
