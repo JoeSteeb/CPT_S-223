@@ -141,7 +141,7 @@ int menu()
     std::cout << "4. Add Command \n";
     std::cout << "5. Remove Command \n";
     std::cout << "6. Exit \n";
-    std::cout << "7. Print List \n";
+    //std::cout << "7. Print List \n";
 
     std::cin >> selection;
     std::cin.ignore();
