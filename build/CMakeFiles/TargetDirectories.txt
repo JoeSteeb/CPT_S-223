@@ -1,3 +1,0 @@
-/home/j/cs/CPT_S-223/build/CMakeFiles/rebuild_cache.dir
-/home/j/cs/CPT_S-223/build/CMakeFiles/edit_cache.dir
-/home/j/cs/CPT_S-223/build/CMakeFiles/MA1.dir
