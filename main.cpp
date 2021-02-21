@@ -3,12 +3,16 @@
 
 #include <iostream>
 #include <cstdlib>
+#include "testQueue.h"
+//#include "queue.h"
 
 // main function
 int main()
 {
     // call your test functions here!
-
+    test::enqueue();
+    test::peek();
+    test::isEmpty();
     return 0;
 }
 

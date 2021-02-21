@@ -22,8 +22,10 @@ public:
 
     void dequeue();
     void enqueue(int x);
+    void setCapacity(int x);
     int peek();
     int size();
+    int getCapacity();
     bool isEmpty();
     bool isFull();
 };
@@ -74,8 +76,13 @@ void queue::enqueue(int item)
     std::cout << "Inserting " << item << '\n';
 
     rear = (rear + 1) % capacity;
-    arr[rear] = size();
+    arr[rear] = item;
     count++;
+}
+
+void queue::setCapacity(int x)
+{
+    capacity = x;
 }
 
 // Utility function to return front element in the queue
@@ -93,6 +100,10 @@ int queue::peek()
 int queue::size()
 {
     return count + 1;
+}
+int queue::getCapacity()
+{
+    return capacity;
 }
 
 // Utility function to check if the queue is empty or not
