@@ -8,14 +8,21 @@ void test::dequeue()
 }
 void test::enqueue()
 {
-/*
-    TestID: enwue check
-    Uniy:
-*/
-//steeb
+    /*
+    Test ID:
+    Unit:
+    Description:
+    data:
+    Precondition:
+    Postcondition:
+    result:
+    Actual result:
+    returnedStatus:
+    */
+    //steeb
 
     //case1: add and check
-    std::cout << "enqueue test: " << '\n';
+    std::cout << "testing enqueue: " << '\n';
     queue testq;
     for(int i = 0; i < testq.getCapacity(); i++)
     {
@@ -41,7 +48,7 @@ void test::enqueue()
 }
 void test::peek()
 {
-//steeb
+    //steeb
     std::cout << "testing peek:" << '\n';
     queue testq;
     testq.enqueue(1);
@@ -54,13 +61,35 @@ void test::size()
 }
 void test::isEmpty()
 {
-//steeb
-    std::cout << "testing peek:" << '\n';
+    /*
+    Test ID:
+    Unit:
+    Description:
+    data:
+    Precondition:
+    Postcondition:
+    result:
+    Actual result:
+    returnedStatus:
+    */
+    //steeb
+    std::cout << "testing isEmpty:" << '\n';
     queue testq;
     if(testq.isEmpty())
         std::cout << "isEmpty test failed, program faild to recognize newly created queue" << '\n';
 }
 void test::isFull()
 {
+    /*
+    Test ID:
+    Unit:
+    Description:
+    data:
+    Precondition:
+    Postcondition:
+    result:
+    Actual result:
+    returnedStatus:
+    */
 
 }
