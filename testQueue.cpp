@@ -4,6 +4,7 @@
 
 void test::dequeue()
 {
+    //test :)
     /*
     Test ID:
     Unit:
@@ -170,8 +171,8 @@ void test::isFull()
     for(int i = 1; i <= testq.getCapacity(); i++)
     {
         testq.enqueue(1);
-        if(testq.isFull())
-            std::cout << "full test failed, returned full when not full"
+        if(testq.isFull() && i != testq.getCapacity())
+            std::cout << "full test failed, returned full when not full";
     }
     if(!testq.isFull())
         std::cout << "full test failed, returned not full when full";
