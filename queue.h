@@ -43,7 +43,7 @@ queue::queue(int size)
 // Destructor to free memory allocated to the queue
 queue::~queue()
 {
-    delete arr; // you are not required to test this function;
+    delete[] arr; // you are not required to test this function;
     // however, are there issues with it?
 }
 

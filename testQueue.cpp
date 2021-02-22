@@ -4,20 +4,50 @@
 
 void test::dequeue()
 {
-    //test :)
     /*
-    Test ID:
-    Unit:
-    Description:
-    data size:
-    Precondition:
-    Postcondition:
-    expected result:
-    Actual result:
-    returnedStatus:
+    Test ID: dequeue element check
+    Unit: test::dequeue()
+    Description: fills up the queue with a list of increasing numbers, and checks if the orders the same on the way out
+    data size: Maximum size of the queue
+    Precondition: list filled with increasing numbers
+    Postcondition: elements peeked then removed in the same order as they were added
+    expected result: elements peeked then removed in the same order as they were added
+    Actual result: elements peeked then removed in the same order as they were added
+    returnedStatus: passed
+    */
+    
+    std::cout << "testing dequeue:" << '\n';
+
+    queue testq;
+    for(int i = 0; i < testq.getCapacity(); i++)
+    {
+        testq.enqueue(i);
+        std::cout <<"size:" << testq.size() <<'\n';
+    }
+
+    for(int i = 0; i < testq.getCapacity(); i++)
+    {
+        if(testq.peek() != i)
+            std::cout << "dequeu test failed, removing in the wrong order";
+
+        testq.dequeue();
+    }
+
+    /*
+    Test ID: dequeue empty check
+    Unit: test::dequeue()
+    Description: creates empty queue and attempts a dequeue
+    data size: 0
+    Precondition: empty queue created
+    Postcondition: dequeue results in error message and program terminates
+    expected result: dequeue results in error message and program terminates
+    Actual result: dequeue results in error message and program terminates
+    returnedStatus: passed
     */
 
-
+    queue testq2;
+    std::cout << "program should underflow and terminate \n";
+    testq.dequeue();
 }
 void test::enqueue()
 {
@@ -27,7 +57,7 @@ void test::enqueue()
     Description: fills up a queue with 1's and checks all elements
     data size: maximum size of queue
     Precondition: peek and dequeue functioning
-    Postcondition: ueue is full 
+    Postcondition: queue is full 
     expected result: queue is full with 1's
     Actual result: initially the resultent queue contained the size of the queue in each element.
     The function was fixed and is now working.
@@ -37,14 +67,17 @@ void test::enqueue()
     //steeb
     std::cout << "testing enqueue: " << '\n';
     queue testq;
+
     for(int i = 0; i < testq.getCapacity(); i++)
     {
         testq.enqueue(1);
     }
+
     for(int i = 0; i < testq.getCapacity(); i++)
     {
         int temp = testq.peek();
         std::cout << temp;
+
         if(temp != 1)
         {
             std::cout << "enqueue test failed, value enqueued did not match value peeked" << '\n';
@@ -65,7 +98,7 @@ void test::enqueue()
     returnedStatus: passed
     */
     testq.setCapacity(0);
-    std::cout << "enqueue test failed, program should overflow and terminate:" << '\n';
+    std::cout << "program should overflow and terminate:" << '\n';
     testq.enqueue(1);   
 
 }
@@ -87,6 +120,7 @@ void test::peek()
     std::cout << "testing peek:" << '\n';
     queue testq;
     testq.enqueue(1);
+
     if(testq.peek() != 1)
         std::cout << "peek test failed, peeked value does not match input" << '\n';
     
@@ -106,6 +140,7 @@ void test::peek()
     testq2.enqueue(1);
     testq2.enqueue(2);
     //std::cout << testq2.peek() << '\n';
+
     if(testq2.peek() != 1)
         std::cout << "peek test failed, queue not returning elements in the correct order";
 }
@@ -124,6 +159,7 @@ void test::size()
     */
     std::cout << "testing enqueue: " << '\n';
     queue testq;
+
     for(int i = 1; i <= testq.getCapacity(); i++)
     {
         testq.enqueue(1);
@@ -139,7 +175,7 @@ void test::isEmpty()
     Unit: test::isEmpty()
     Description: checks if isEmpty is true, when new empty queue is created
     Test dataSize: 0
-    Precondition: default constructor creates an empty queue
+    Precondition: empty queue created
     Postcondition: queue remains empty
     Expected result: queue stays empty, and isEmpty returns true
     Actual result: queue stays empty, and isEmpty returns true
@@ -149,7 +185,8 @@ void test::isEmpty()
     //steeb
     std::cout << "testing isEmpty:" << '\n';
     queue testq;
-    if(testq.isEmpty())
+
+    if(!testq.isEmpty())
         std::cout << "isEmpty test failed, program faild to recognize newly created queue" << '\n';
 }
 void test::isFull()
@@ -165,7 +202,9 @@ void test::isFull()
     Actual result: test initially failed, returned not full when full, was fixed by removing +1 from size()
     returnedStatus:failed
     */
-    
+
+    std::cout << "testing isFull:" << '\n';
+
     queue testq;
 
     for(int i = 1; i <= testq.getCapacity(); i++)
@@ -174,6 +213,7 @@ void test::isFull()
         if(testq.isFull() && i != testq.getCapacity())
             std::cout << "full test failed, returned full when not full";
     }
+
     if(!testq.isFull())
         std::cout << "full test failed, returned not full when full";
 
