@@ -157,7 +157,7 @@ void test::size()
     Actual result: initially the size was off by 1, but it has been fixed
     returnedStatus: failed
     */
-    std::cout << "testing enqueue: " << '\n';
+    std::cout << "testing size: " << '\n';
     queue testq;
 
     for(int i = 1; i <= testq.getCapacity(); i++)
