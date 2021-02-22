@@ -26,8 +26,8 @@ void test::enqueue()
     Description: fills up a queue with 1's and checks all elements
     data size: maximum size of queue
     Precondition: peek and dequeue functioning
-    Postcondition: enqueue is full 
-    expected result: enque is full with 1's
+    Postcondition: ueue is full 
+    expected result: queue is full with 1's
     Actual result: initially the resultent queue contained the size of the queue in each element.
     The function was fixed and is now working.
     Status: failed
@@ -154,15 +154,26 @@ void test::isEmpty()
 void test::isFull()
 {
     /*
-    Test ID:
-    Unit:
-    Description:
-    data size:
-    Precondition:
-    Postcondition:
-    expected result:
-    Actual result:
-    returnedStatus:
+    Test ID: full test
+    Unit: test::isFull()
+    Description: fills up que and checks if full while and after filling
+    data size: size of capacity
+    Precondition: queue is filled up with 1's and checked after each loop
+    Postcondition: queue is filled with 1's and isFull() returns true 
+    expected result: isFUll returns true
+    Actual result: test initially failed, returned not full when full, was fixed by removing +1 from size()
+    returnedStatus:failed
     */
+    
+    queue testq;
+
+    for(int i = 1; i <= testq.getCapacity(); i++)
+    {
+        testq.enqueue(1);
+        if(testq.isFull())
+            std::cout << "full test failed, returned full when not full"
+    }
+    if(!testq.isFull())
+        std::cout << "full test failed, returned not full when full";
 
 }

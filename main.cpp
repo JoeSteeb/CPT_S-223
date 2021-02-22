@@ -14,8 +14,8 @@ int main()
     //test::peek();
     //test::isEmpty();
     //test::dequeue();
-    test::size();
-    //test::isFull();
+    //test::size();
+    test::isFull();
     return 0;
 }
 

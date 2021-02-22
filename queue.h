@@ -115,7 +115,7 @@ bool queue::isEmpty()
 // Utility function to check if the queue is full or not
 bool queue::isFull()
 {
-    return (size()-1 == capacity);
+    return (size() == capacity);
 }
 
 
