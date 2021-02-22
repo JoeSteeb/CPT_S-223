@@ -99,7 +99,7 @@ int queue::peek()
 // Utility function to return the size of the queue
 int queue::size()
 {
-    return count + 1;
+    return count;
 }
 int queue::getCapacity()
 {

@@ -10,9 +10,9 @@
 int main()
 {
     // call your test functions here!
-    test::enqueue();
-    test::peek();
-    test::isEmpty();
+    //test::enqueue();
+    //test::peek();
+    //test::isEmpty();
     //test::dequeue();
     test::size();
     //test::isFull();

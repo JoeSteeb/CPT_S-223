@@ -30,7 +30,7 @@ void test::enqueue()
     expected result: enque is full with 1's
     Actual result: initially the resultent queue contained the size of the queue in each element.
     The function was fixed and is now working.
-    Status: passed
+    Status: failed
     */
 
     //steeb
@@ -98,7 +98,7 @@ void test::peek()
     Postcondition: 2 is peeked
     expected result: 2 is peeked
     Actual result: origionally peek returned the rear value, but that was corrected, and the function now works
-    returnedStatus: passed
+    returnedStatus: failed
     */
 
     queue testq2;
@@ -111,18 +111,25 @@ void test::peek()
 void test::size()
 {
     /*
-    Test ID:
-    Unit:
-    Description:
-    data size:
-    Precondition:
-    Postcondition:
-    expected result:
-    Actual result:
-    returnedStatus:
+    Test ID: size check
+    Unit: test::size()
+    Description: fills up list, checking after each enqueue.
+    data size: maximum size of queue
+    Precondition: 1 added repeatedly to fill queue, size checked after each loop to verify it is growing correctly
+    Postcondition: size grows with index of loop
+    expected result: size grows with index of loop
+    Actual result: initially the size was off by 1, but it has been fixed
+    returnedStatus: failed
     */
-
-
+    std::cout << "testing enqueue: " << '\n';
+    queue testq;
+    for(int i = 1; i <= testq.getCapacity(); i++)
+    {
+        testq.enqueue(1);
+        //std::cout << "size:" << testq.size() << "i = " << i << '\n';
+        if(testq.size() != i)
+            std::cout << "size test failed inccorect size returned";
+    }
 }
 void test::isEmpty()
 {
