@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/Users/jiayu/GitHub/CPTS-223-Assignments/MA2/BST.h
+/home/j/cs/MA2/CPT_S-223/BST.h
 iostream
 -
+sstream
+-
+vector
+-
+limits
+-
 
-/Users/jiayu/GitHub/CPTS-223-Assignments/MA2/main.cpp
+/home/j/cs/MA2/CPT_S-223/main.cpp
 BST.h
-/Users/jiayu/GitHub/CPTS-223-Assignments/MA2/BST.h
+/home/j/cs/MA2/CPT_S-223/BST.h
 

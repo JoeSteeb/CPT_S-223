@@ -9,10 +9,12 @@ int main()
     bst->add(-1);
     bst->add(-10);
     bst->add(100);
+    bst->add(200);
     bst->print();
-    cout<<endl;
+    cout << endl;
     bst->printLevelOrder();
-    cout << "100 in BST? true (1) or false (0): " << bst->contains(100) << endl;
+
+    /*cout << "100 in BST? true (1) or false (0): " << bst->contains(100) << endl;
     cout << "9 in BST? true (1) or false (0): " << bst->contains(9) << endl;
     cout<<"Nodes count: "<<bst->nodesCount();
     cout<<endl;
@@ -28,6 +30,6 @@ int main()
     bst->printLevelOrder();
     cout<<"Nodes count: "<<bst->nodesCount();
     cout<<endl;
-    delete bst;
+    delete bst;*/
     return 0;
 }
