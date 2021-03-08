@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/j/cs/MA2/CPT_S-223/build",
+  "command": "/usr/bin/c++     -Wall -g   -std=gnu++11 -o CMakeFiles/CPTS_223_MA2.dir/main.cpp.o -c /home/j/cs/MA2/CPT_S-223/main.cpp",
+  "file": "/home/j/cs/MA2/CPT_S-223/main.cpp"
+}
+]

@@ -14,22 +14,22 @@ int main()
     cout << endl;
     bst->printLevelOrder();
 
-    /*cout << "100 in BST? true (1) or false (0): " << bst->contains(100) << endl;
+    cout << "100 in BST? true (1) or false (0): " << bst->contains(100) << endl;
     cout << "9 in BST? true (1) or false (0): " << bst->contains(9) << endl;
-    cout<<"Nodes count: "<<bst->nodesCount();
-    cout<<endl;
-    cout<<"Height: "<<bst->height();
-    cout<<endl;
-    cout<<"Max path: ";
+    cout << "Nodes count: " << bst->nodesCount();
+    cout << endl;
+    cout << "Height: " << bst->height();
+    cout << endl;
+    cout << "Max path: ";
     bst->printMaxPath();
-    cout<<endl;
+    cout << endl;
     bst->deleteValue(11);
-    cout<<"After 11 removed: ";
+    cout << "After 11 removed: ";
     bst->print();
-    cout<<endl;
+    cout << endl;
     bst->printLevelOrder();
-    cout<<"Nodes count: "<<bst->nodesCount();
-    cout<<endl;
-    delete bst;*/
+    cout << "Nodes count: " << bst->nodesCount();
+    cout << endl;
+    delete bst;
     return 0;
 }

@@ -175,7 +175,7 @@ public:
 
     ~BST()
     {
-        cout << "TODO: Implement Destructor" << endl;
+        //cout << "TODO: Implement Destructor" << endl;
         if (this->_root != nullptr)
             treeDelete(this->_root);
     }
@@ -247,6 +247,35 @@ public:
     void printMaxPath()
     {
         cout << "TODO: Implement printMaxPath" << endl;
+        //std::vector<T> path =
+        //couldn't get it to stop segfaulting :(
+        //MaxPathHelper(_root);
+        /*for (T element : path)
+        {
+            std::cout << element;
+        }*/
+    }
+
+    std::vector<T> MaxPathHelper(Node<T> *pNode)
+    {
+
+        if (_root == NULL)
+        {
+            std::vector<T> temp = {};
+            return temp;
+        }
+
+        std::vector<T> rightVect = MaxPathHelper(pNode->right);
+
+        std::vector<T> leftVect = MaxPathHelper(pNode->left);
+
+        if (leftVect.size() > rightVect.size())
+            leftVect.push_back(pNode->value);
+
+        else
+            rightVect.push_back(pNode->value);
+
+        return (leftVect.size() > rightVect.size() ? leftVect : rightVect);
     }
 
     bool deleteValue(T value)
