@@ -6,7 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/home/j/code/CPT_S223/PA2/CPT_S-223/AVLNode.h
+
+/home/j/code/CPT_S223/PA2/CPT_S-223/AVLTree.h
+iostream
+-
+sstream
+-
+vector
+-
+limits
+-
+AVLNode.h
+/home/j/code/CPT_S223/PA2/CPT_S-223/AVLNode.h
+
 /home/j/code/CPT_S223/PA2/CPT_S-223/main.cpp
 iostream
 -
+AVLNode.h
+/home/j/code/CPT_S223/PA2/CPT_S-223/AVLNode.h
+AVLTree.h
+/home/j/code/CPT_S223/PA2/CPT_S-223/AVLTree.h
 
