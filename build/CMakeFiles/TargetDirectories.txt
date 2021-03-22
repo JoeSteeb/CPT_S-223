@@ -1,3 +1,0 @@
-/home/j/code/CPT_S223/PA2/test/CPT_S-223/build/CMakeFiles/rebuild_cache.dir
-/home/j/code/CPT_S223/PA2/test/CPT_S-223/build/CMakeFiles/edit_cache.dir
-/home/j/code/CPT_S223/PA2/test/CPT_S-223/build/CMakeFiles/CPTS_223_PA2.dir

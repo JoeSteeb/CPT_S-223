@@ -45,13 +45,11 @@ int main()
 
     for (int &element : descending)
     {
-        cout << element << ' ';
         treeDescending.insert(element);
     }
 
     for (int &element : Random)
     {
-        cout << element << ' ';
         treeRandom.insert(element);
     }
 
