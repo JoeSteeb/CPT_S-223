@@ -21,4 +21,6 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
-        run: cmake .. && make && ./CPTS_223_PA2
+        run: cmake .. 
+        run: make
+        run: ./CPTS_223_PA2
