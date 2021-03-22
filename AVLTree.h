@@ -87,18 +87,6 @@ protected:
         updateHeight();
     }
 
-    void doubleRotateLeft(Node<T> *root)
-    {
-        Node<T> *l = root->left;
-        Node<T> *r;
-    }
-
-    void doubleRotateRight(Node<T> *root)
-    {
-        Node<T> *l = root->left;
-        Node<T> *lr = l->right;
-    }
-
     void updateHeightHelper(Node<T> *root)
     {
         if (root->right != nullptr)
