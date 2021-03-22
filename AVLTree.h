@@ -10,9 +10,9 @@
 using namespace std;
 
 template <typename T>
-class BST
+class AVLTree
 {
-public:
+protected:
     Node<T> *_root; // Root of the tree nodes
 
     /* Add new T val to the tree */
@@ -73,7 +73,6 @@ public:
             this->_root = root->left;
             this->_root->parent = nullptr;
         }
-
         else
             cout << "error";
 
@@ -100,22 +99,40 @@ public:
         Node<T> *lr = l->right;
     }
 
-    void updateHeightHelper(Node<T> *root, int cHeight)
+    void updateHeightHelper(Node<T> *root)
     {
-        if (root->right)
+        if (root->right != nullptr)
         {
-            updateHeightHelper(root->right, cHeight - 1);
+            updateHeightHelper(root->right);
         }
-        if (root->left)
+        if (root->left != nullptr)
         {
-            updateHeightHelper(root->left, cHeight - 1);
+            updateHeightHelper(root->left);
         }
-        root->height = cHeight;
+        root->height = heightHelper(root);
     }
 
     void updateHeight()
     {
-        updateHeightHelper(this->_root, height());
+        updateHeightHelper(this->_root);
+    }
+
+    int getBalance(Node<T> *root)
+    {
+        int tempHL;
+        int tempHR;
+        if (root == nullptr)
+            return 0;
+        if (root->left == nullptr)
+            tempHL = -1;
+        else
+            tempHL = root->left->height;
+        if (root->right == nullptr)
+            tempHR = -1;
+        else
+            tempHR = root->right->height;
+
+        return tempHL - tempHR;
     }
 
     void addHelper(Node<T> *root, T val)
@@ -147,6 +164,32 @@ public:
         }
         if (updateH)
             updateHeight();
+
+        //Balancing tree
+
+        int balance = getBalance(root);
+
+        if (balance > 1)
+        {
+            if (getBalance(root->left) < 0)
+            {
+                leftRotate(root->left);
+                rightRotate(root);
+            }
+            else
+                rightRotate(root);
+        }
+
+        else if (balance < -1)
+        {
+            if (getBalance(root->right) > 0)
+            {
+                rightRotate(root->right);
+                leftRotate(root);
+            }
+            else
+                leftRotate(root);
+        }
     }
 
     /* Return number of nodes in tree */
@@ -184,9 +227,26 @@ public:
         printInOrderHelper(root->right);
     }
 
+    bool validateHelper(Node<T> *root)
+    {
+        int balance = getBalance(root);
+
+        if (balance < -1 || balance > 1)
+            return false;
+        else
+        {
+            if (root->left != nullptr && root->right)
+            {
+                return min(validateHelper(root->left), validateHelper(root->right));
+            }
+        }
+
+        return true;
+    }
+
     /********************************* PUBLIC API *****************************/
 public:
-    BST() : _root(nullptr) {} // Basic initialization constructor
+    AVLTree() : _root(nullptr) {} // Basic initialization constructor
 
     /**
 	 * Destructor - Needs to free *all* nodes in the tree
@@ -204,7 +264,7 @@ public:
         delete dNode;
     }
 
-    ~BST()
+    ~AVLTree()
     {
         //cout << "TODO: Implement Destructor" << endl;
         if (this->_root != nullptr)
@@ -212,7 +272,7 @@ public:
     }
 
     /* Public API */
-    void add(T val)
+    void insert(T val)
     {
         if (this->_root)
         {
@@ -262,6 +322,11 @@ public:
         //cout << "TODO: Implement contains" << endl;
         //return numeric_limits<T>::min();
         return containsN(this->_root, value);
+    }
+
+    bool validate()
+    {
+        return validateHelper(_root);
     }
 };
 

@@ -7,7 +7,6 @@ class Node
 public:
     T value;
     int height;
-    int balance;
     Node *left;
     Node *right;
     Node *parent;
@@ -18,7 +17,6 @@ public:
         this->left = nullptr;
         this->right = nullptr;
         this->parent = nullptr;
-        balance = 0;
         height = 0;
     }
 
@@ -28,7 +26,6 @@ public:
         this->left = nullptr;
         this->right = nullptr;
         this->parent = p;
-        balance = 0;
         height = 0;
     }
 
