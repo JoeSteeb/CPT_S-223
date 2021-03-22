@@ -81,6 +81,4 @@ int main()
     cout << "height of my ascending tree " << treeAscending.height() << '\n';
     cout << "height of my descending tree " << treeDescending.height() << '\n';
     cout << "height of my random tree " << treeRandom.height() << "\n\n";
-
-    treeRandom.print();
 }
