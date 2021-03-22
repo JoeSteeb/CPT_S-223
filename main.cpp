@@ -10,7 +10,6 @@ using namespace std;
 
 int main()
 {
-    //std::cout << "Hello World";
     AVLTree<int> treeAscending;
     AVLTree<int> treeDescending;
     AVLTree<int> treeRandom;
@@ -39,15 +38,10 @@ int main()
         Random[index2] = temp;
     }
 
-    int s1 = 0;
     for (int &element : ascending)
     {
-        //cout << element << ' ';
         treeAscending.insert(element);
-        s1 += element;
     }
-
-    //cout << '\n';
 
     for (int &element : descending)
     {
@@ -55,17 +49,11 @@ int main()
         treeDescending.insert(element);
     }
 
-    cout << '\n';
-
-    int s2 = 0;
     for (int &element : Random)
     {
         cout << element << ' ';
         treeRandom.insert(element);
-        s2 += element;
     }
-
-    cout << '\n';
 
     cout << "ascending tree valid? " << treeAscending.validate() << '\n';
     cout << "descending tree valid? " << treeDescending.validate() << '\n';
@@ -94,6 +82,5 @@ int main()
     cout << "height of my descending tree " << treeDescending.height() << '\n';
     cout << "height of my random tree " << treeRandom.height() << "\n\n";
 
-    cout << "ascending numSum: " << s1;
-    cout << "random numSum: " << s2;
+    treeRandom.print();
 }
