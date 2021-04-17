@@ -2,6 +2,7 @@
 #define __PROBING_HASH_H
 
 #include <vector>
+#include <type_traits>
 #include <math.h>
 #include <stdexcept>
 
@@ -21,38 +22,27 @@ enum EntryState
 template <typename K, typename V>
 class ProbingHash : public Hash<K, V>
 { // derived from Hash
-    struct bucket
-    {
-        bool deleted;
-        std::pair<K, V> data;
-
-        bucket()
-        {
-            deleted = true;
-        }
-    };
 
 private:
     // Needs a table and a size.
     // Table should be a vector of std::pairs for lazy deletion
     int Ssize;
-    std::vector<bucket> storage;
+    std::vector<bucket<K, V>> storage;
 
 public:
-    int hashit(K key, int Vsize)
+    int hashit(int key, int Vsize)
     {
-        if (std::is_same<K, int>::value)
-            return key % Vsize;
-        else if (std::is_same<K, std::string>::value)
-        {
-            int hash = 0;
-            for (int i = 0; i < key.size(); i++)
-                hash += int(key[i]) * pow(31, i);
-            return hash % Vsize;
-        }
-        else
-            return -1;
+        return key % Vsize;
     }
+
+    int hashit(std::string key, int Vsize)
+    {
+        int hash = 0;
+        for (int i = 0; i < key.size(); i++)
+            hash += int(key[i]) * pow(31, i);
+        return hash % Vsize;
+    }
+
     ProbingHash(int n = 11)
     {
         Ssize = 0;
@@ -82,10 +72,10 @@ public:
         }
         else
         {
-            int index = hashit(pair.first) + 1;
+            int index = hashit(pair.first, storage.size()) + 1;
             while (!storage[index].deleted)
             {
-                if (index >= storage.size())
+                if (index >= (int)storage.size())
                     index++;
                 else
                     index = 0;
@@ -104,7 +94,7 @@ public:
 
     void clear()
     {
-        for (bucket element : storage)
+        for (bucket<K, V> element : storage)
         {
             element.deleted = true;
         }
@@ -149,4 +139,4 @@ private:
     }
 };
 
-#endif //__PROBING_HASH_H
+#endif //__P

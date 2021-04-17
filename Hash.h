@@ -33,6 +33,17 @@
 //  This interface is based upon, and expects similar behavior to the C++11 STL unordered_map
 //
 template <typename K, typename V>
+struct bucket
+{
+    bool deleted;
+    std::pair<K, V> data;
+
+    bucket()
+    {
+        deleted = true;
+    }
+};
+template <typename K, typename V>
 class Hash
 {
 private:
