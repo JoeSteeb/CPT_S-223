@@ -15,9 +15,9 @@
 #include "Hash.h"
 
 // Namespaces to include
-using std::vector;
 using std::list;
 using std::pair;
+using std::vector;
 
 using std::cout;
 using std::endl;
@@ -25,41 +25,53 @@ using std::endl;
 //
 // Separate chaining based hash table - derived from Hash
 //
-template<typename K, typename V>
-class ChainingHash : public Hash<K,V> {
+template <typename K, typename V>
+class ChainingHash : public Hash<K, V>
+{
 private:
+    int Ssize;
 
 public:
-    ChainingHash(int n = 11) {
+    ChainingHash(int n = 11)
+    {
+        Ssize = 0;
     }
 
-    ~ChainingHash() {
+    ~ChainingHash()
+    {
         this->clear();
     }
 
-    int size() {
+    int size()
+    {
         return -1;
     }
 
-    V operator[](const K& key) {
+    V operator[](const K &key)
+    {
         return -1;
     }
 
-    bool insert(const std::pair<K, V>& pair) {
+    bool insert(const std::pair<K, V> &pair)
+    {
         return true;
     }
 
-    void erase(const K& key) {
+    void erase(const K &key)
+    {
     }
 
-    void clear() {
+    void clear()
+    {
     }
 
-    int bucket_count() {
+    int bucket_count()
+    {
         return -1;
     }
 
-    float load_factor() {
+    float load_factor()
+    {
         return -1;
     }
 
@@ -86,10 +98,10 @@ private:
         return true;
     }
 
-    int hash(const K& key) {
-        return 0;       
+    int hash(const K &key)
+    {
+        return 0;
     }
-
 };
 
 #endif //__CHAINING_HASH_H

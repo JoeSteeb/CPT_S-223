@@ -11,6 +11,7 @@
 #define __Hash_H
 
 #include <math.h>
+#include <iostream>
 
 // Hash class interface notes
 // ******************PUBLIC OPERATIONS*********************
@@ -21,7 +22,6 @@
 // void clear( )                            --> Empties the hash
 // int bucket_count()                       --> Returns the number of buckets allocated (size of the hash vector)
 // float load_factor( )                     --> Returns the load factor of the hash
-
 
 // void ~Hash( )       --> Destructor
 // Hash( )             --> Basic constructor
@@ -36,34 +36,31 @@ template <typename K, typename V>
 class Hash
 {
 private:
-
 public:
     virtual ~Hash() = 0;
 
     virtual int size() = 0;
+    virtual V
+    operator[](const K &key) = 0;
 
-    virtual V operator[](const K& key) = 0;
+    virtual bool insert(const std::pair<K, V> &pair) = 0;
 
-    virtual bool insert(const std::pair<K, V>& pair) = 0;
-
-    virtual void erase(const K& key) = 0;
+    virtual void erase(const K &key) = 0;
 
     virtual void clear() = 0;
 
-    virtual int bucket_count()= 0;
+    virtual int bucket_count() = 0;
 
     virtual float load_factor() = 0;
 
-// *************** Private /internal function implementation ******* //
+    // *************** Private /internal function implementation ******* //
 
 private:
-    virtual int hash(const K& key) = 0;
-
+    virtual int hash(const K &key) = 0;
 };
 
 // This is required to make Hash a pure virtual (abstract) class
 template <typename K, typename V>
 Hash<K, V>::~Hash() {}
-
 
 #endif
