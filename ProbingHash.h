@@ -30,12 +30,12 @@ private:
     std::vector<bucket<K, V>> storage;
 
 public:
-    int hashit(int key, int Vsize)
+    int hashit(const int key, int Vsize)
     {
         return key % Vsize;
     }
 
-    int hashit(std::string key, int Vsize)
+    int hashit(const std::string key, int Vsize)
     {
         int hash = 0;
         for (int i = 0; i < key.size(); i++)
@@ -89,7 +89,7 @@ public:
 
     void erase(const K &key)
     {
-        //storage[hashit(key.first, storage.size())].deleted = true;
+        storage[hashit(key, storage.size())].deleted = true;
     }
 
     void clear()
