@@ -121,7 +121,10 @@ private:
 
     int hash(const K &key)
     {
-        return key % this->storage.size();
+        if (storage.size() != 0)
+            return key % storage.size();
+        else
+            return 0;
     }
 };
 
