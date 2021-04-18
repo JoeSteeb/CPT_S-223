@@ -45,35 +45,55 @@ public:
 
     int size()
     {
-        return -1;
+        return Ssize;
     }
 
     V operator[](const K &key)
     {
+        for (std::pair<K, V> element : storage[hash(key)])
+        {
+            if (element.first == key)
+                return element.second;
+        }
+
         return -1;
     }
 
     bool insert(const std::pair<K, V> &pair)
     {
+        Ssize++;
+        storage[hash(pair.first)].push_back(pair);
         return true;
     }
 
     void erase(const K &key)
     {
+        for (std::pair<K, V> element : storage[hash(key)])
+        {
+            if (element.first == key)
+                storage[hash(key)].remove(element);
+        }
     }
 
     void clear()
     {
+        for (std::list<std::pair<K, V>> List : storage)
+        {
+            List.clear();
+        }
     }
 
     int bucket_count()
     {
-        return -1;
+        return storage.size();
     }
 
     float load_factor()
     {
-        return -1;
+        if (storage.size() != 0)
+            return (float)Ssize / (float)storage.size();
+        else
+            return 0.0;
     }
 
 private:

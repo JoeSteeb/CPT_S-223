@@ -2,7 +2,6 @@
 #define __PROBING_HASH_H
 
 #include <vector>
-#include <type_traits>
 #include <math.h>
 #include <stdexcept>
 
@@ -48,24 +47,30 @@ public:
 
     int size()
     {
-        int count = 0;
-        for (bucket<K, V> element : storage)
-        {
-            if (!element.deleted)
-            {
-                count++;
-            }
-        };
-        return count;
+        return Ssize;
     }
 
     V operator[](const K &key)
     {
+        int hashVal = hash(key);
+        if (storage[hashVal].data.first == key && !storage[hashVal].deleted)
+            return storage[hashVal].data.second;
+        else
+        {
+            for (int i = hashVal + 1; i != hashVal; i++)
+            {
+                if (storage[i].data.first == key && !storage[hashVal].deleted)
+                    return storage[i].data.second;
+                if (i >= (int)(storage.size() - 1))
+                    i = 0;
+            }
+        }
         return -1;
     }
 
     bool insert(const std::pair<K, V> &pair)
     {
+        Ssize++;
         if (load_factor() > 0.5)
         {
             storage.resize(storage.size() * 2);
@@ -92,9 +97,22 @@ public:
         return true;
     }
 
+    //fixme completly wrong
     void erase(const K &key)
     {
-        storage[hash(key)].deleted = true;
+        int hashVal = hash(key);
+        if (storage[hashVal].data.first == key)
+            storage[hashVal].deleted = true;
+        else
+        {
+            for (int i = hashVal + 1; i != hashVal; i++)
+            {
+                if (storage[i].data.first == key)
+                    storage[i].deleted = true;
+                if (i >= (int)(storage.size() - 1))
+                    i = 0;
+            }
+        }
     }
 
     void clear()
@@ -112,7 +130,10 @@ public:
 
     float load_factor()
     {
-        return (float)bucket_count() / (float)storage.size();
+        if (storage.size() != 0)
+            return (float)Ssize / (float)storage.size();
+        else
+            return 0.0;
     }
 
 private:
