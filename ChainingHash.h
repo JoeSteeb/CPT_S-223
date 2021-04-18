@@ -30,6 +30,7 @@ class ChainingHash : public Hash<K, V>
 {
 private:
     int Ssize;
+    std::vector<std::list<std::pair<K, V>>> storage;
 
 public:
     ChainingHash(int n = 11)
@@ -100,7 +101,7 @@ private:
 
     int hash(const K &key)
     {
-        return 0;
+        return key % this->storage.size();
     }
 };
 

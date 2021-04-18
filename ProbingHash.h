@@ -12,11 +12,16 @@ using std::pair;
 using std::vector;
 
 // Can be used for tracking lazy deletion for each element in your table
-enum EntryState
+template <typename K, typename V>
+struct bucket
 {
-    EMPTY = 0,
-    VALID = 1,
-    DELETED = 2
+    bool deleted;
+    std::pair<K, V> data;
+
+    bucket()
+    {
+        deleted = true;
+    }
 };
 
 template <typename K, typename V>
@@ -30,19 +35,6 @@ private:
     std::vector<bucket<K, V>> storage;
 
 public:
-    int hashit(const int key, int Vsize)
-    {
-        return key % Vsize;
-    }
-
-    int hashit(const std::string key, int Vsize)
-    {
-        int hash = 0;
-        for (int i = 0; i < key.size(); i++)
-            hash += int(key[i]) * pow(31, i);
-        return hash % Vsize;
-    }
-
     ProbingHash(int n = 11)
     {
         Ssize = 0;
@@ -56,7 +48,15 @@ public:
 
     int size()
     {
-        return -1;
+        int count = 0;
+        for (bucket<K, V> element : storage)
+        {
+            if (!element.deleted)
+            {
+                count++;
+            }
+        };
+        return count;
     }
 
     V operator[](const K &key)
@@ -66,13 +66,18 @@ public:
 
     bool insert(const std::pair<K, V> &pair)
     {
-        if (storage[hashit(pair.first, storage.size())].deleted)
+        if (load_factor() > 0.5)
         {
-            storage[hashit(pair.first, storage.size())].data = pair;
+            storage.resize(storage.size() * 2);
+        }
+
+        if (storage[hash(pair.first)].deleted)
+        {
+            storage[hash(pair.first)].data = pair;
         }
         else
         {
-            int index = hashit(pair.first, storage.size()) + 1;
+            int index = hash(pair.first) + 1;
             while (!storage[index].deleted)
             {
                 if (index >= (int)storage.size())
@@ -89,7 +94,7 @@ public:
 
     void erase(const K &key)
     {
-        storage[hashit(key, storage.size())].deleted = true;
+        storage[hash(key)].deleted = true;
     }
 
     void clear()
@@ -102,12 +107,12 @@ public:
 
     int bucket_count()
     {
-        return -1;
+        return storage.size();
     }
 
     float load_factor()
     {
-        return -1;
+        return (float)bucket_count() / (float)storage.size();
     }
 
 private:
@@ -132,10 +137,9 @@ private:
 
         return true;
     }
-
     int hash(const K &key)
     {
-        return 0;
+        return key % this->storage.size();
     }
 };
 

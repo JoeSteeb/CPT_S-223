@@ -33,17 +33,6 @@
 //  This interface is based upon, and expects similar behavior to the C++11 STL unordered_map
 //
 template <typename K, typename V>
-struct bucket
-{
-    bool deleted;
-    std::pair<K, V> data;
-
-    bucket()
-    {
-        deleted = true;
-    }
-};
-template <typename K, typename V>
 class Hash
 {
 private:
@@ -67,7 +56,7 @@ public:
     // *************** Private /internal function implementation ******* //
 
 private:
-    virtual int hash(const K &key) = 0;
+    int hash(const K &key);
 };
 
 // This is required to make Hash a pure virtual (abstract) class
