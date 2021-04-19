@@ -1,3 +1,0 @@
-/home/j/code/cpts223/PA3/CPT_S-223/build/CMakeFiles/rebuild_cache.dir
-/home/j/code/cpts223/PA3/CPT_S-223/build/CMakeFiles/edit_cache.dir
-/home/j/code/cpts223/PA3/CPT_S-223/build/CMakeFiles/CPTS_223_PA3-executable.dir

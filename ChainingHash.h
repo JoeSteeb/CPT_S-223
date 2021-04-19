@@ -36,6 +36,7 @@ public:
     ChainingHash(int n = 11)
     {
         Ssize = 0;
+        storage.resize(n);
     }
 
     ~ChainingHash()
@@ -53,16 +54,22 @@ public:
         for (std::pair<K, V> element : storage[hash(key)])
         {
             if (element.first == key)
+            {
                 return element.second;
+                break;
+            }
         }
-
-        return -1;
     }
 
     bool insert(const std::pair<K, V> &pair)
     {
-        Ssize++;
+        if (load_factor() > 0.75)
+        {
+            storage.resize(findNextPrime(storage.size() * 2));
+        }
+        //std::cout << pair.first << ' ' << pair.second;
         storage[hash(pair.first)].push_back(pair);
+        Ssize++;
         return true;
     }
 
@@ -71,8 +78,12 @@ public:
         for (std::pair<K, V> element : storage[hash(key)])
         {
             if (element.first == key)
+            {
                 storage[hash(key)].remove(element);
+                break;
+            }
         }
+        Ssize--;
     }
 
     void clear()
@@ -81,6 +92,7 @@ public:
         {
             List.clear();
         }
+        Ssize = 0;
     }
 
     int bucket_count()
@@ -121,10 +133,10 @@ private:
 
     int hash(const K &key)
     {
-        if (storage.size() != 0)
-            return key % storage.size();
-        else
-            return 0;
+        //if (storage.size() != 0)
+        return key % storage.size();
+        // else
+        //return 0;
     }
 };
 

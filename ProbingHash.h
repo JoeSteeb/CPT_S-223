@@ -57,32 +57,35 @@ public:
             return storage[hashVal].data.second;
         else
         {
-            for (int i = hashVal + 1; i != hashVal; i++)
+            int i = hashVal + 1;
+            while (i != hashVal)
             {
                 if (storage[i].data.first == key && !storage[hashVal].deleted)
                     return storage[i].data.second;
                 if (i >= (int)(storage.size() - 1))
                     i = 0;
+                i++;
             }
         }
-        return -1;
+        //return -1;
     }
 
     bool insert(const std::pair<K, V> &pair)
     {
-        Ssize++;
-        if (load_factor() > 0.5)
+        if (load_factor() > 0.75)
         {
-            storage.resize(storage.size() * 2);
+            storage.resize(findNextPrime(storage.size() * 2));
         }
 
-        if (storage[hash(pair.first)].deleted)
+        int hashVal = hash(pair.first);
+
+        if (storage[hashVal].deleted)
         {
-            storage[hash(pair.first)].data = pair;
+            storage[hashVal].data = pair;
         }
         else
         {
-            int index = hash(pair.first) + 1;
+            int index = hashVal + 1;
             while (!storage[index].deleted)
             {
                 if (index >= (int)storage.size())
@@ -92,8 +95,8 @@ public:
             }
             storage[index].data = pair;
             storage[index].deleted = false;
-            Ssize++;
         }
+        Ssize++;
         return true;
     }
 
@@ -108,11 +111,15 @@ public:
             for (int i = hashVal + 1; i != hashVal; i++)
             {
                 if (storage[i].data.first == key)
+                {
                     storage[i].deleted = true;
+                    break;
+                }
                 if (i >= (int)(storage.size() - 1))
                     i = 0;
             }
         }
+        Ssize--;
     }
 
     void clear()
@@ -121,6 +128,7 @@ public:
         {
             element.deleted = true;
         }
+        Ssize = 0;
     }
 
     int bucket_count()
@@ -130,10 +138,10 @@ public:
 
     float load_factor()
     {
-        if (storage.size() != 0)
-            return (float)Ssize / (float)storage.size();
-        else
-            return 0.0;
+        //if (storage.size() != 0)
+        return (float)Ssize / (float)storage.size();
+        //else
+        // return 0.0;
     }
 
 private:
@@ -160,10 +168,10 @@ private:
     }
     int hash(const K &key)
     {
-        if (storage.size() != 0)
-            return key % storage.size();
-        else
-            return 0;
+        //if (storage.size() != 0)
+        return key % storage.size();
+        // else
+        // return 0;
     }
 };
 
