@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/j/code/cpts223/MA4/CPT_S-223/build",
+  "command": "/usr/bin/c++    -Wall -fopenmp -g -std=gnu++11 -o CMakeFiles/CPTS_223_MA4-executable.dir/main.cpp.o -c /home/j/code/cpts223/MA4/CPT_S-223/main.cpp",
+  "file": "/home/j/code/cpts223/MA4/CPT_S-223/main.cpp"
+}
+]
