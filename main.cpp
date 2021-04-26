@@ -30,9 +30,7 @@ void runHeap()
     {
         // Compare the pop result with the value sorted by stl
         // If the two required functions are correct, the assertion should pass
-        std::cout << "expected:" << vect[i] << '\n'
-                  << "actual:" << hp->pop() << '\n';
-        //assert(vect[i] == hp->pop());
+        assert(vect[i] == hp->pop());
     }
 }
 int main(int argc, char *argv[])
